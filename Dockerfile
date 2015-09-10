@@ -53,14 +53,14 @@ RUN yum install -y \
 #    && rm -rf /root/$cudaPkg $cudaLoc/doc $cudaLoc/libnvvp $cudaLoc/bin/nvvp
 
 # CUDA 5.0
-ENV cudaPkg cuda_5.0.35_linux_64_rhel5.x-1.run
-ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/5_0/rel-update-1/installers/$cudaPkg
-ENV cudaLoc /usr/local/cuda-5.0
+#ENV cudaPkg cuda_5.0.35_linux_64_rhel5.x-1.run
+#ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/5_0/rel-update-1/installers/$cudaPkg
+#ENV cudaLoc /usr/local/cuda-5.0
 
 # CUDA 5.5
-#ENV cudaPkg cuda_5.5.22_linux_64.run
-#ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/5_5/rel/installers/$cudaPkg
-#ENV cudaLoc /usr/local/cuda-5.5
+ENV cudaPkg cuda_5.5.22_linux_64.run
+ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/5_5/rel/installers/$cudaPkg
+ENV cudaLoc /usr/local/cuda-5.5
 
 # CUDA 6.0
 #ENV cudaPkg cuda_6.0.37_linux_64.run

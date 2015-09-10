@@ -68,14 +68,14 @@ RUN yum install -y \
 #ENV cudaLoc /usr/local/cuda-6.0
 
 # CUDA 6.5
-ENV cudaPkg cuda_6.5.14_linux_64.run
-ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/$cudaPkg
-ENV cudaLoc /usr/local/cuda-6.5
+#ENV cudaPkg cuda_6.5.14_linux_64.run
+#ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/$cudaPkg
+#ENV cudaLoc /usr/local/cuda-6.5
 
 # CUDA 7.0
-#ENV cudaPkg cuda_7.0.28_linux.run
-#ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/7_0/Prod/local_installers/$cudaPkg
-#ENV cudaLoc /usr/local/cuda-7.0
+ENV cudaPkg cuda_7.0.28_linux.run
+ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/7_0/Prod/local_installers/$cudaPkg
+ENV cudaLoc /usr/local/cuda-7.0
 
 # CUDA 7.5
 #ENV cudaPkg cuda_7.5.18_linux.run

@@ -44,18 +44,18 @@ RUN yum install -y \
     && rm -rf /tmp/*
 
 # CUDA 4.2 - Uses its own install implementation, due to different packaging
-ENV cudaPkg cudatoolkit_4.2.9_linux_64_rhel5.5.run
-ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/$cudaPkg
-ENV cudaLoc /usr/local/cuda
-RUN curl -o /root/$cudaPkg $cudaUrl \
-    && chmod 755 /root/$cudaPkg \
-    && /root/$cudaPkg -- --prefix=/usr/local auto \
-    && rm -rf /root/$cudaPkg $cudaLoc/doc $cudaLoc/libnvvp $cudaLoc/bin/nvvp
+#ENV cudaPkg cudatoolkit_4.2.9_linux_64_rhel5.5.run
+#ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/$cudaPkg
+#ENV cudaLoc /usr/local/cuda
+#RUN curl -o /root/$cudaPkg $cudaUrl \
+#    && chmod 755 /root/$cudaPkg \
+#    && /root/$cudaPkg -- --prefix=/usr/local auto \
+#    && rm -rf /root/$cudaPkg $cudaLoc/doc $cudaLoc/libnvvp $cudaLoc/bin/nvvp
 
 # CUDA 5.0
-#ENV cudaPkg cuda_5.0.35_linux_64_rhel5.x-1.run
-#ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/5_0/rel-update-1/installers/$cudaPkg
-#ENV cudaLoc /usr/local/cuda-5.0
+ENV cudaPkg cuda_5.0.35_linux_64_rhel5.x-1.run
+ENV cudaUrl http://developer.download.nvidia.com/compute/cuda/5_0/rel-update-1/installers/$cudaPkg
+ENV cudaLoc /usr/local/cuda-5.0
 
 # CUDA 5.5
 #ENV cudaPkg cuda_5.5.22_linux_64.run
@@ -84,11 +84,11 @@ RUN curl -o /root/$cudaPkg $cudaUrl \
 
 # Install CUDA, general implementation for all but 4.2
 # Also remove doc,samples,nvvp to save some space
-#RUN curl -o /root/$cudaPkg $cudaUrl \
-#    && chmod 755 /root/$cudaPkg \
-#    && /root/$cudaPkg --silent --toolkit --override \
-#    && rm -rf /root/$cudaPkg \
-#    && rm -rf $cudaLoc/doc $cudaLoc/jre $cudaLoc/libnsight $cudaLoc/libnvvp $cudaLoc/bin/nvvp $cudaLoc/samples
+RUN curl -o /root/$cudaPkg $cudaUrl \
+    && chmod 755 /root/$cudaPkg \
+    && /root/$cudaPkg --silent --toolkit --override \
+    && rm -rf /root/$cudaPkg \
+    && rm -rf $cudaLoc/doc $cudaLoc/jre $cudaLoc/libnsight $cudaLoc/libnvvp $cudaLoc/bin/nvvp $cudaLoc/samples
 
 # Add CUDA to ld.so.conf
 RUN echo $cudaLoc/lib64 >> /etc/ld.so.conf \

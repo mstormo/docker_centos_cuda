@@ -18,6 +18,7 @@ will mount /my/sources/project with root permissions on CentOS 7 w/CUDA 7.5.
 will mount /my/sources/project with my current user's permissions on CentOS 5 w/CUDA 4.2.
 
 **Tag** / **compressed** / **local**
+
 **latest** / 875 MB / [![](https://badge.imagelayers.io/mstormo/centos_cuda:latest.svg)](https://imagelayers.io/?images=mstormo/centos_cuda:latest)
 
 7_7.5 / 875 MB / [![](https://badge.imagelayers.io/mstormo/centos_cuda:7_7.5.svg)](https://imagelayers.io/?images=mstormo/centos_cuda:7_7.5)

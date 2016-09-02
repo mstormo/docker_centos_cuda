@@ -1,10 +1,10 @@
 #FROM centos:5
-#FROM centos:6
-FROM centos:7
+FROM centos:6
+#FROM centos:7
 LABEL Description="CentOS with various CUDA versions for quick build of producs based on customer configuration"
 MAINTAINER Marius Storm-Olsen <mstormo@gmail.com>
 
-ARG os_ver=7
+ARG os_ver=6
 ARG cuda_ver=7.5
 
 # add a few volumes useful for the image

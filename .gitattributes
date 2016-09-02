@@ -1,0 +1,4 @@
+*.txt		text
+*.sh		eol=lf
+*.bashrc    eol=lf
+LS_COLOR    eof=lf

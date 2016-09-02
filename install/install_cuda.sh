@@ -8,13 +8,21 @@ case "cuda-$1" in
 		cudaPkg=cudatoolkit_4.2.9_linux_64_rhel5.5.run
 		cudaUrl=http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/$cudaPkg
 		cudaLoc=/usr/local/cuda
-		curl -o /root/$cudaPkg $cudaUrl \
-			&& chmod 755 /root/$cudaPkg \
-			&& /root/$cudaPkg -- --prefix=/usr/local auto \
-			&& rm -rf /root/$cudaPkg $cudaLoc/doc $cudaLoc/libnvvp $cudaLoc/bin/nvvp $cudaLoc/lib/*_static.a $cudaLoc/lib64/*_static.a \
-			&& echo $cudaLoc/lib64 >> /etc/ld.so.conf \
-			&& echo $cudaLoc/lib >> /etc/ld.so.conf \
-			&& ldconfig
+
+		echo $(date +%T) - Downloading $cudaPkg...
+		curl -sS -o /root/$cudaPkg $cudaUrl
+		chmod 755 /root/$cudaPkg
+
+		echo $(date +%T) - Installing $cudaPkg...
+		/root/$cudaPkg -- --prefix=/usr/local auto || (echo Cuda installation failed!! && exit 1)
+
+		echo $(date +%T) - Cleaning up $cudaPkg, and removing non-important parts
+		rm -rvf /root/$cudaPkg $cudaLoc/doc $cudaLoc/libnvvp $cudaLoc/bin/nvvp $cudaLoc/lib/*_static.a $cudaLoc/lib64/*_static.a
+
+		echo $(date +%T) - Updating ldconfig for Cuda...
+		echo $cudaLoc/lib64 >> /etc/ld.so.conf
+		echo $cudaLoc/lib >> /etc/ld.so.conf
+		ldconfig
 		exit $?
 		;;
 	cuda-5.0)
@@ -47,13 +55,19 @@ cudaLoc=/usr/local/cuda-$1
 
 # Install CUDA, general implementation for all but 4.2
 # Also remove doc,samples,nvvp to save some space
-curl -o /root/$cudaPkg $cudaUrl \
-	&& chmod 755 /root/$cudaPkg \
-	&& /root/$cudaPkg --silent --toolkit --override \
-	&& rm -rf /root/$cudaPkg \
-	&& rm -rf $cudaLoc/doc $cudaLoc/jre $cudaLoc/libnsight $cudaLoc/libnvvp $cudaLoc/bin/nvvp $cudaLoc/samples $cudaLoc/lib/*_static.a $cudaLoc/lib64/*_static.a
+echo $(date +%T) - Downloading $cudaPkg...
+curl -sS -o /root/$cudaPkg $cudaUrl
+chmod 755 /root/$cudaPkg
+
+echo $(date +%T) - Installing $cudaPkg...
+/root/$cudaPkg --silent --toolkit --override || (echo Cuda installation failed!! && exit 1)
+
+echo $(date +%T) - Cleaning up $cudaPkg, and removing non-important parts
+rm -rvf /root/$cudaPkg \
+rm -rvf $cudaLoc/doc $cudaLoc/jre $cudaLoc/libnsight $cudaLoc/libnvvp $cudaLoc/bin/nvvp $cudaLoc/samples $cudaLoc/lib/*_static.a $cudaLoc/lib64/*_static.a
 
 # Add CUDA to ld.so.conf
+echo $(date +%T) - Updating ldconfig for Cuda...
 echo $cudaLoc/lib64 >> /etc/ld.so.conf \
 	&& echo $cudaLoc/lib >> /etc/ld.so.conf \
 	&& ldconfig

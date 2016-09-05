@@ -2,11 +2,12 @@
 
 # install OpenSSH server for ssh login, if run as daemon ------------------------------------------
 yum install -y \
-	openssh-server
+        openssh-server
 
 mkdir /var/run/sshd
 ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
 ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
+[ $1 -eq 7 ] && ssh-keygen -A
 
 sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 sed -i 's/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/' /etc/ssh/sshd_config

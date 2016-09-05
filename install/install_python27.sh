@@ -24,3 +24,6 @@ yum remove -y \
 python2.7 -m ensurepip
 python2.7 -m pip install --upgrade pip
 python2.7 -m pip install numpy
+
+# Add symlink
+ln -s /usr/local/bin/python2.7 /usr/local/bin/python

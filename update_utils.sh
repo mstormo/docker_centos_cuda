@@ -3,6 +3,8 @@
 # source update_utils.sh
 # ...then run which ever utility function
 
+source install/utils.sh
+
 showRemoteBranches() {
     branches=()
     eval "$(git for-each-ref --shell --format='branches+=(%(refname))' refs/remotes/origin/)"
@@ -59,5 +61,41 @@ createMergeAndUpdateLocalBranches() {
 				;;
 		esac
 		git commit -m "Update Dockerfile for CentOS $local_os, Cuda $local_cuda" Dockerfile
+    done
+}
+
+buildAndPush() {
+    remote_repo=$1
+    echo Do you want to build and push all local branches to ${remote_repo}:\<branches\>?
+    read -p "[Enter to continue, Ctrl+C to stop]"
+
+    branches=()
+    eval "$(git for-each-ref --shell --format='branches+=(%(refname))' refs/heads/)"
+    echo Will build the following branches ------------ > build.log
+    for branch in "${branches[@]}"; do
+        local_branch=${branch#refs/heads/}
+        echo $local_branch >> build.log
+    done
+
+    echo >> build.log
+    echo Building  ------------------------------------------------------------ >> build.log
+
+    echo remote repo: $remote_repo
+    for branch in "${branches[@]}"; do
+        local_branch=${branch#refs/heads/}
+
+        echo Branch.. $local_branch -------------------------------------------
+        echo $(date +"[%D %T]") Building $local_branch ----- >> build.log
+        git checkout -f $local_branch
+
+        [ "$local_branch" == "master" ] && local_branch=latest
+
+        docker build -t local_build .
+        rc=$?; if [[ $rc != 0 ]]; then continue; fi
+
+        echo $(date +"[%D %T]") pushing build... >> build.log
+        docker tag local_build ${remote_repo}:${local_branch}
+        docker push ${remote_repo}:${local_branch}
+        echo $(date +"[%D %T]") build done... >> build.log
     done
 }

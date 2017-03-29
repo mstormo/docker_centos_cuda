@@ -15,7 +15,9 @@ pythonUrl=http://www.python.org/ftp/python/2.7.12/$pythonPkg
 
 wget --no-check-certificate -O /root/$pythonPkg $pythonUrl \
         && cd /root && tar xvf /root/$pythonPkg \
-        && cd $pythonTag && ./configure && gmake altinstall \
+        && cd $pythonTag \
+        && ./configure --enable-shared --enable-unicode=ucs4 --enable-optimizations \
+        && gmake altinstall \
         && cd /root && rm -rf /root/$pythonTag /root/$pythonPkg
 
 yum remove -y \

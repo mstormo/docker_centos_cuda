@@ -6,6 +6,14 @@ cuda_ver=$2
 source /root/install/utils.sh
 now build_start
 
+case "$1" in
+    5)
+        sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf
+        sed -i 's/mirrorlist/#mirrorlist/' /etc/yum.repos.d/*.repo
+        sed -i 's|#baseurl=http://mirror.centos.org/centos/$releasever|baseurl=http://vault.centos.org/5.11|' /etc/yum.repos.d/*.repo
+        ;;
+esac
+
 yum update -y
 
 now packages_start

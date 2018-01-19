@@ -6,16 +6,6 @@ cuda_ver=$2
 source /root/install/utils.sh
 now build_start
 
-case "$1" in
-    5)
-        sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf
-        sed -i 's/mirrorlist/#mirrorlist/' /etc/yum.repos.d/*.repo
-        sed -i 's|#baseurl=http://mirror.centos.org/centos/$releasever|baseurl=http://vault.centos.org/5.11|' /etc/yum.repos.d/*.repo
-        ;;
-esac
-
-yum update -y
-
 now packages_start
 /root/install/install_packages.sh     	$os_ver
 now packages_stop
@@ -34,6 +24,11 @@ now ccache_start
 now ccache_stop
 echo_total ccache_start ccache_stop Ccache installed!
 
+now git_start
+/root/install/install_git.sh			$os_ver
+now git_stop
+echo_total git_start git_stop Git built and installed!
+
 now cmake_start
 /root/install/install_cmake.sh			$os_ver
 now cmake_stop
@@ -43,11 +38,6 @@ now svn_start
 /root/install/install_subversion.sh		$os_ver
 now svn_stop
 echo_total svn_start svn_stop Subversion installed!
-
-now git_start
-/root/install/install_git.sh			$os_ver
-now git_stop
-echo_total git_start git_stop Git built and installed!
 
 now python_start
 /root/install/install_python27.sh		$os_ver

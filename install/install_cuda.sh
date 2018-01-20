@@ -58,6 +58,21 @@ case "cuda-$1" in
                 cudaUrl=http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/$cudaPkg
                 cudaRun=cuda-linux64-rel-7.5.18-19867135.run
                 ;;
+        cuda-8.0)
+                cudaPkg=cuda_8.0.61_375.26_linux.run
+                cudaUrl=http://developer2.download.nvidia.com/compute/cuda/8.0/Prod2/local_installers/$cudaPkg
+                cudaRun=
+                ;;
+        cuda-9.0)
+                cudaPkg=cuda_9.0.176_384.81_linux.run
+                cudaUrl=https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
+                cudaRun=
+                ;;
+        cuda-9.1)
+                cudaPkg=cuda_9.1.85_387.26_linux.run
+                cudaUrl=https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.1.85_387.26_linux
+                cudaRun=
+                ;;
 esac
 
 cudaLoc=/usr/local/cuda-$1
@@ -65,7 +80,8 @@ cudaLoc=/usr/local/cuda-$1
 # Install CUDA, general implementation for all but 4.2
 # Also remove doc,samples,nvvp to save some space
 echo $(date +%T) - Downloading $cudaPkg...
-curl -sS -o /root/$cudaPkg $cudaUrl
+#curl -sS -o /root/$cudaPkg $cudaUrl
+wget -nv -O /root/$cudaPkg $cudaUrl
 chmod 755 /root/$cudaPkg
 echo_elapsed cuda_build_start Cuda package downloaded!
 

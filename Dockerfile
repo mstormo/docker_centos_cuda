@@ -22,6 +22,7 @@ RUN /root/install/install_all.sh  ${os_ver} ${cuda_ver}
 
 # separate RUNs for each part, to speed up development
 # use install_all.sh for smaller image for production
+# COPY install/utils.sh /root/install/utils.sh
 # COPY install/install_packages.sh /root/install/install_packages.sh
 # RUN /root/install/install_packages.sh       $os_ver
 # COPY install/install_devtoolsets.sh /root/install/install_devtoolsets.sh

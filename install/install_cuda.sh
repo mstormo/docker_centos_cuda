@@ -70,7 +70,7 @@ case "cuda-$1" in
                 ;;
         cuda-9.1)
                 cudaPkg=cuda_9.1.85_387.26_linux.run
-                cudaUrl=https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.1.85_387.26_linux
+                cudaUrl=https://developer.nvidia.com/compute/cuda/9.1/Prod/local_installers/cuda_9.1.85_387.26_linux
                 cudaRun=
                 ;;
 esac

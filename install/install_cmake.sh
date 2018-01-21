@@ -12,9 +12,20 @@
 
 # install cmake 3.9.0 -----------------------------------------------------------------------------
 
+curldev=libcurl-devel.x86_64
+[ $1 -eq 5 ] && curldev=curl-devel.x86_64
+
+yum install -y \
+        $curldev \
+        ncurses-devel
+
 cd /tmp
 git clone https://github.com/Kitware/CMake.git
 cd CMake
 git checkout tags/v3.9.0
 ./bootstrap --prefix=/usr && make && make install
 cd / && rm -rf /tmp/CMake
+
+yum remove -y \
+        $curldev \
+        ncurses-devel

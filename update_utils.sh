@@ -46,7 +46,7 @@ createMergeAndUpdateLocalBranches() {
 
         echo Branch: $local_branch, OS: $local_os, CUDA: $local_cuda
         git checkout -b $local_branch $branch
-        git merge -Xtheirs master
+        GIT_MERGE_AUTOEDIT=no git merge --no-edit -Xtheirs master
 
 		sed -i -e "s/\(ARG os_ver\).*/\1=$local_os/m" -e "s/\(ARG cuda_ver\).*/\1=$local_cuda/m" Dockerfile
 		case "$local_os" in

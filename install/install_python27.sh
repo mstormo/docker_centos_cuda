@@ -23,6 +23,7 @@ wget --no-check-certificate -O /root/$pythonPkg $pythonUrl \
 yum remove -y \
         readline-devel.x86_64
 
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 python2.7 -m ensurepip
 python2.7 -m pip install --upgrade pip
 python2.7 -m pip install numpy

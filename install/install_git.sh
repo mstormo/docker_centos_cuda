@@ -23,5 +23,4 @@ wget --no-check-certificate -O /root/$gitPkg $gitUrl \
         && cd /root && rm -rf /root/$gitTag /root/$gitPkg
 
 yum remove -y \
-        $curldev \
         gettext-devel

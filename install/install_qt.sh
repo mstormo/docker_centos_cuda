@@ -40,7 +40,7 @@ yum install -y \
         $smDevelLib
 
 # make sure we use gcc/g++ 4.8 for building
-source scl_source enable devtoolset-2 >/dev/null 2>&1 || echo GCC 4.8 enabled
+[ $1 -lt 7 ] && source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
 
 # Qt 4.8.x ----------------------------------------------------------------------------------------
 case "download" in

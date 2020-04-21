@@ -7,7 +7,7 @@ yum install -y \
         readline-devel.x86_64 \
         openssl-devel.x86_64
 
-source scl_source enable devtoolset-2 >/dev/null 2>&1 || echo GCC 4.8 enabled
+[ $1 -lt 7 ] && source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
 
 pythonTag=Python-2.7.18
 pythonPkg=${pythonTag}.tgz

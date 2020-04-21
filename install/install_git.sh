@@ -10,7 +10,7 @@ yum install -y \
         gettext-devel.x86_64 \
         openssl-devel.x86_64
 
-source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
+[ $1 -lt 7 ] && source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
 
 git_version=2.9.3
 gitTag=git-${git_version}

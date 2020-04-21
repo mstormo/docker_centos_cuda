@@ -50,12 +50,12 @@ now openssh_stop
 echo_total openssh_start openssh_stop OpenSSH Server installed!
 
 now cuda_start
-/root/install/install_cuda.sh 			$cuda_ver
+/root/install/install_cuda.sh 			$cuda_ver $os_ver
 now cuda_stop
 echo_total cuda_start cuda_stop Cuda $cuda_ver installed!
 
 now qt_start
-/root/install/install_qt.sh			$os_ver
+/root/install/install_qt.sh			    $os_ver
 now qt_stop
 echo_total qt_start qt_stop Qt built and installed!
 		

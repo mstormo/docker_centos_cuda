@@ -9,9 +9,9 @@ yum install -y \
 
 source scl_source enable devtoolset-2 >/dev/null 2>&1 || echo GCC 4.8 enabled
 
-pythonTag=Python-2.7.12
+pythonTag=Python-2.7.18
 pythonPkg=${pythonTag}.tgz
-pythonUrl=http://www.python.org/ftp/python/2.7.12/$pythonPkg
+pythonUrl=http://www.python.org/ftp/python/2.7.18/$pythonPkg
 
 wget --no-check-certificate -O /root/$pythonPkg $pythonUrl \
         && cd /root && tar xvf /root/$pythonPkg \

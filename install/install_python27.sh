@@ -27,6 +27,7 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 python2.7 -m ensurepip
 python2.7 -m pip install --upgrade pip
 python2.7 -m pip install numpy
+python2.7 -m pip install sphinx breathe
 
 # Add symlink
 ln -s /usr/local/bin/python2.7 /usr/local/bin/python

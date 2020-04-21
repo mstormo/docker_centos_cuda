@@ -23,7 +23,7 @@ cd /tmp
 git clone https://github.com/Kitware/CMake.git
 cd CMake
 git checkout tags/v3.17.1
-./bootstrap --prefix=/usr && make && make install
+./bootstrap --prefix=/usr && make -j && make install -j
 cd / && rm -rf /tmp/CMake
 
 yum remove -y \

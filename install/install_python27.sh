@@ -17,7 +17,7 @@ wget --no-check-certificate -O /root/$pythonPkg $pythonUrl \
         && cd /root && tar xvf /root/$pythonPkg \
         && cd $pythonTag \
         && ./configure --enable-shared --enable-unicode=ucs4 --enable-optimizations \
-        && gmake altinstall \
+        && gmake altinstall -j \
         && cd /root && rm -rf /root/$pythonTag /root/$pythonPkg
 
 yum remove -y \

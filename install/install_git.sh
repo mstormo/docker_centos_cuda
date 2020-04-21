@@ -19,7 +19,7 @@ gitUrl=https://codeload.github.com/git/git/tar.gz/v$git_version
 
 wget --no-check-certificate -O /root/$gitPkg $gitUrl \
         && cd /root && tar xvf /root/$gitPkg \
-        && cd $gitTag && gmake prefix=/usr/local install \
+        && cd $gitTag && gmake prefix=/usr/local install -j \
         && cd /root && rm -rf /root/$gitTag /root/$gitPkg
 
 yum remove -y \

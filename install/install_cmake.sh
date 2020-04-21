@@ -22,7 +22,7 @@ yum install -y \
 cd /tmp
 git clone https://github.com/Kitware/CMake.git
 cd CMake
-git checkout tags/v3.9.0
+git checkout tags/v3.17.1
 ./bootstrap --prefix=/usr && make && make install
 cd / && rm -rf /tmp/CMake
 

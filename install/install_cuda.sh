@@ -73,6 +73,26 @@ case "cuda-$1" in
                 cudaUrl=https://developer.nvidia.com/compute/cuda/9.1/Prod/local_installers/cuda_9.1.85_387.26_linux
                 cudaRun=
                 ;;
+        cuda-9.2)
+                cudaPkg=cuda_9.2.148_396.37_linux.run
+                cudaUrl=https://developer.nvidia.com/compute/cuda/9.2/Prod2/local_installers/cuda_9.2.148_396.37_linux
+                cudaRun=
+                ;;
+        cuda-10.0)
+                cudaPkg=cuda_10.0.130_410.48_linux.run
+                cudaUrl=https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux
+                cudaRun=
+                ;;
+        cuda-10.1)
+                cudaPkg=cuda_10.1.243_418.87.00_linux.run
+                cudaUrl=http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/$cudaPkg
+                cudaRun=
+                ;;
+        cuda-10.2)
+                cudaPkg=cuda_10.2.89_440.33.01_linux.run
+                cudaUrl=http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/$cudaPkg
+                cudaRun=
+                ;;
 esac
 
 cudaLoc=/usr/local/cuda-$1

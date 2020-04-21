@@ -2,7 +2,7 @@
 #FROM centos:6
 FROM centos:7
 LABEL Description="CentOS with various CUDA versions for quick build of producs based on customer configuration"
-MAINTAINER Marius Storm-Olsen <mstormo@gmail.com>
+LABEL Maintainer="Marius Storm-Olsen <mstormo@gmail.com>"
 
 ARG os_ver=7
 ARG cuda_ver=9.1

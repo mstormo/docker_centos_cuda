@@ -39,10 +39,15 @@ now svn_start
 now svn_stop
 echo_total svn_start svn_stop Subversion installed!
 
-now python_start
+now python_start27
 /root/install/install_python27.sh		$os_ver
-now python_stop
-echo_total python_start python_stop Python 2.7 built and installed!
+now python_stop27
+echo_total python_start27 python_stop27 Python 2.7 built and installed!
+
+now python_start3
+/root/install/install_python3.sh		$os_ver
+now python_stop3
+echo_total python_start3 python_stop3 Python 3 built and installed!
 
 now openssh_start
 /root/install/install_openssh.sh		$os_ver
@@ -74,7 +79,8 @@ echo_total ccache_start ccache_stop Ccache
 echo_total cmake_start cmake_stop Cmake
 echo_total svn_start svn_stop Subversion
 echo_total git_start git_stop Git
-echo_total python_start python_stop Python 2.7
+echo_total python_start27 python_stop27 Python 2.7
+echo_total python_start3 python_stop3 Python 3.x
 echo_total openssh_start openssh_stop OpenSSH Server
 echo_total cuda_start cuda_stop Cuda $cuda_ver
 echo_total qt_start qt_stop Qt

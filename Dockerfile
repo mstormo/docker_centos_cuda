@@ -42,7 +42,7 @@ RUN /root/install/install_all.sh  ${os_ver} ${cuda_ver}
 # COPY install/install_openssh.sh /root/install/install_openssh.sh
 # RUN /root/install/install_openssh.sh        $os_ver
 # COPY install/install_cuda.sh /root/install/install_cuda.sh
-# RUN /root/install/install_cuda.sh           $cuda_ver
+# RUN /root/install/install_cuda.sh           $cuda_ver $os_ver
 # COPY install/install_qt.sh /root/install/install_qt.sh
 # RUN /root/install/install_qt.sh             $os_ver
 

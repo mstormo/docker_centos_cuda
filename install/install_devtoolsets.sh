@@ -35,7 +35,7 @@ esac
 
 case "$1" in
         6|5)# add devtoolset 2 (gcc 4.8) repo
-                wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo
+                wget --no-check-certificate http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo
                 yum update -y
                 yum install -y \
                         devtoolset-2-runtime \

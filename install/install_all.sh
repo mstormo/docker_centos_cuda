@@ -24,6 +24,11 @@ now ccache_start
 now ccache_stop
 echo_total ccache_start ccache_stop Ccache installed!
 
+now openssl_start
+/root/install/install_openssl.sh  	    $os_ver
+now openssl_stop
+echo_total openssl_start openssl_stop OpenSSL installed!
+
 now git_start
 /root/install/install_git.sh			$os_ver
 now git_stop

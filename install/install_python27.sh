@@ -9,6 +9,9 @@ yum install -y \
 
 [ $1 -lt 7 ] && source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
 
+use_local_openssl='echo'
+[ $1 -eq 5 ] && use_local_openssl='patch -p0 -i /root/patches/openssl.patch'
+
 pythonTag=Python-2.7.18
 pythonPkg=${pythonTag}.tgz
 pythonUrl=http://www.python.org/ftp/python/2.7.18/$pythonPkg
@@ -16,6 +19,7 @@ pythonUrl=http://www.python.org/ftp/python/2.7.18/$pythonPkg
 wget --no-check-certificate -O /root/$pythonPkg $pythonUrl \
         && cd /root && tar xvf /root/$pythonPkg \
         && cd $pythonTag \
+	&& $use_local_openssl \
         && ./configure --enable-shared --enable-unicode=ucs4 --enable-optimizations \
         && gmake altinstall -j \
         && cd /root && rm -rf /root/$pythonTag /root/$pythonPkg

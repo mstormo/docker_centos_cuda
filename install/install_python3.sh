@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# no Python 3 on CentOS 5
+[ $1 -eq 5 ] && exit 0
+
 # install Python 3.9 ------------------------------------------------------------------------------
 yum install -y \
         readline-devel.x86_64

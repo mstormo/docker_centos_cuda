@@ -5,6 +5,7 @@ now cuda_build_start
 
 [ $2 -lt 7 ] && source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
 
+show_verbose=--verbose
 case "cuda-$1" in
         cuda-4.2)
                 # CUDA 4.2 - Uses its own install implementation, due to different packaging
@@ -87,11 +88,13 @@ case "cuda-$1" in
                 cudaPkg=cuda_10.1.243_418.87.00_linux.run
                 cudaUrl=http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/$cudaPkg
                 cudaRun=
+                show_verbose=
                 ;;
         cuda-10.2)
                 cudaPkg=cuda_10.2.89_440.33.01_linux.run
                 cudaUrl=http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/$cudaPkg
                 cudaRun=
+                show_verbose=
                 ;;
 esac
 
@@ -110,7 +113,7 @@ echo_elapsed cuda_build_start Cuda package downloaded!
 trap '' 15
 
 echo $(date +%T) - Installing $cudaPkg...
-/root/$cudaPkg --silent --toolkit --override --verbose
+/root/$cudaPkg --silent --toolkit --override $show_verbose
 echo_elapsed cuda_build_start Cuda package installed!
 
 # remove signal trap

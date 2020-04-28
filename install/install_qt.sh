@@ -81,7 +81,7 @@ case "download" in
 esac
 
 pushd /usr/lib64/qt4/bin
-if [ "$PWD" == "/usr/lib64/qt4/bin"]; then
+if [[ "$PWD" == "/usr/lib64/qt4/bin" ]]; then
     for i in * ; do
         case "${i}" in
             assistant|designer|linguist|lrelease|lupdate|moc|qmake|qtconfig|qtdemo|uic)

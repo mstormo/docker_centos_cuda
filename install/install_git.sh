@@ -1,5 +1,13 @@
 #!/bin/sh
 
+case "$1" in
+        8)  # add all git packages
+                yum install -y \
+                        git-all
+                exit 0
+                ;;
+esac
+
 curldev=libcurl-devel.x86_64
 [ $1 -eq 5 ] && curldev=curl-devel.x86_64
 

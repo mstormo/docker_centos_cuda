@@ -34,5 +34,4 @@ python2.7 -m pip install numpy
 
 # Add symlink
 # Make 3.x the default python distro
-#ln -s /usr/local/bin/python2.7 /usr/local/bin/python
 ln -s /usr/local/bin/python2.7 /usr/local/bin/python2

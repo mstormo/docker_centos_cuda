@@ -1,13 +1,24 @@
 #!/bin/sh
 
-# install cmake 3.9.0 -----------------------------------------------------------------------------
+# # install standard cmake for CentOS 8
+# case "$1" in
+#         8)  # install distro python3 package
+#                 yum install -y \
+#                         cmake \
+#                         cmake-doc
+#                 ;;
+# esac
+# [ $1 -eq 8 ] && exit 0
+
+# install cmake 3.17.1 -----------------------------------------------------------------------------
 
 curldev=libcurl-devel.x86_64
 [ $1 -eq 5 ] && curldev=curl-devel.x86_64
 
 yum install -y \
         $curldev \
-        ncurses-devel
+        ncurses-devel \
+        openssl-devel.x86_64
 
 [ $1 -lt 7 ] && source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
 

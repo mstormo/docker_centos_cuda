@@ -9,6 +9,11 @@ case "$1" in
         sed -i 's/mirrorlist/#mirrorlist/' /etc/yum.repos.d/*.repo
         sed -i 's|#baseurl=http://mirror.centos.org/centos/$releasever|baseurl=http://vault.centos.org/5.11|' /etc/yum.repos.d/*.repo
         ;;
+    8)
+        rm -rf /etc/yum.repos.d/wandisco-svn*
+        sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/CentOS-PowerTools.repo
+        yum -y install epel-release
+        ;;
 esac
 
 yum update -y

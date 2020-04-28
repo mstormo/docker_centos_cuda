@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# no devtoolsets on CentOS8
+[ $1 -eq 8 ] && exit 0
+
 # install devtoolsets -----------------------------------------------------------------------------
 case "$1" in
         7)  # add devtoolset 4

@@ -3,8 +3,9 @@
 source /root/install/utils.sh
 now cuda_build_start
 
-source scl_source enable devtoolset-2 >/dev/null 2>&1 || echo GCC 4.8 enabled
+[ $2 -lt 7 ] && source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
 
+show_verbose=--verbose
 case "cuda-$1" in
         cuda-4.2)
                 # CUDA 4.2 - Uses its own install implementation, due to different packaging
@@ -58,6 +59,43 @@ case "cuda-$1" in
                 cudaUrl=http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/$cudaPkg
                 cudaRun=cuda-linux64-rel-7.5.18-19867135.run
                 ;;
+        cuda-8.0)
+                cudaPkg=cuda_8.0.61_375.26_linux.run
+                cudaUrl=http://developer2.download.nvidia.com/compute/cuda/8.0/Prod2/local_installers/$cudaPkg
+                cudaRun=
+                ;;
+        cuda-9.0)
+                cudaPkg=cuda_9.0.176_384.81_linux.run
+                cudaUrl=https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
+                cudaRun=
+                ;;
+        cuda-9.1)
+                cudaPkg=cuda_9.1.85_387.26_linux.run
+                cudaUrl=https://developer.nvidia.com/compute/cuda/9.1/Prod/local_installers/cuda_9.1.85_387.26_linux
+                cudaRun=
+                ;;
+        cuda-9.2)
+                cudaPkg=cuda_9.2.148_396.37_linux.run
+                cudaUrl=https://developer.nvidia.com/compute/cuda/9.2/Prod2/local_installers/cuda_9.2.148_396.37_linux
+                cudaRun=
+                ;;
+        cuda-10.0)
+                cudaPkg=cuda_10.0.130_410.48_linux.run
+                cudaUrl=https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux
+                cudaRun=
+                ;;
+        cuda-10.1)
+                cudaPkg=cuda_10.1.243_418.87.00_linux.run
+                cudaUrl=http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/$cudaPkg
+                cudaRun=
+                show_verbose=
+                ;;
+        cuda-10.2)
+                cudaPkg=cuda_10.2.89_440.33.01_linux.run
+                cudaUrl=http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/$cudaPkg
+                cudaRun=
+                show_verbose=
+                ;;
 esac
 
 cudaLoc=/usr/local/cuda-$1
@@ -65,7 +103,8 @@ cudaLoc=/usr/local/cuda-$1
 # Install CUDA, general implementation for all but 4.2
 # Also remove doc,samples,nvvp to save some space
 echo $(date +%T) - Downloading $cudaPkg...
-curl -sS -o /root/$cudaPkg $cudaUrl
+#curl -sS -o /root/$cudaPkg $cudaUrl
+wget -nv -O /root/$cudaPkg $cudaUrl
 chmod 755 /root/$cudaPkg
 echo_elapsed cuda_build_start Cuda package downloaded!
 
@@ -74,7 +113,7 @@ echo_elapsed cuda_build_start Cuda package downloaded!
 trap '' 15
 
 echo $(date +%T) - Installing $cudaPkg...
-/root/$cudaPkg --silent --toolkit --override --verbose
+/root/$cudaPkg --silent --toolkit --override $show_verbose
 echo_elapsed cuda_build_start Cuda package installed!
 
 # remove signal trap

@@ -6,7 +6,7 @@ LABEL Description="CentOS with various CUDA versions for quick build of products
 LABEL Maintainer="Marius Storm-Olsen <mstormo@gmail.com>"
 
 ARG os_ver=8
-ARG cuda_ver=10.2
+ARG cuda_ver=9.0
 
 # add a few volumes useful for the image
 #     /sources  - persistant storage for application sources (host FS)

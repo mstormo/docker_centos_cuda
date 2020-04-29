@@ -67,8 +67,35 @@ createMergeAndUpdateLocalBranches() {
     done
 }
 
+dockerCleanup() {
+    case "$1" in
+        "safe")
+            docker system prune
+            ;;
+        "more")
+            docker system prune -a
+            ;;
+        "all")
+            docker system prune -a --volumes
+            ;;
+        "old")
+            docker volume rm $(docker volume ls -qf dangling=true)
+            docker rm $(docker ps -qa --no-trunc --filter "status=exited")
+            docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+            docker rmi $(docker images | grep "none" | awk '/ / { print $3 }')
+            ;;
+        *)
+            echo 'usage: dockerCleanup [safe|more|all|old]'
+            echo
+            docker system df
+            ;;
+    esac
+}
+
 buildAndPush() {
     remote_repo=$1
+    docker system df
+    echo
     echo Do you want to build and push all local branches to ${remote_repo}:\<branches\>?
     read -p "[Enter to continue, Ctrl+C to stop]"
 

@@ -40,14 +40,14 @@ yum install -y \
         $smDevelLib
 
 # make sure we use gcc/g++ 4.8 for building
-source scl_source enable devtoolset-2 >/dev/null 2>&1 || echo GCC 4.8 enabled
+[ $1 -lt 7 ] && source scl_source enable devtoolset-2 2>/dev/null || echo GCC 4.8 enabled
 
 # Qt 4.8.x ----------------------------------------------------------------------------------------
 case "download" in
     "build")
         qtTag=qt-everywhere-opensource-src-4.8.7
         qtPkg=${qtTag}.tar.gz
-        qtUrl=https://download.qt.io/official_releases/qt/4.8/4.8.7/$qtPkg
+        qtUrl=https://download.qt.io/archive/qt/4.8/4.8.7/$qtPkg
 
         wget --no-check-certificate -O /root/$qtPkg $qtUrl \
                 && cd /root && tar xvf /root/$qtPkg \
@@ -59,11 +59,13 @@ case "download" in
                                -plugindir /usr/lib64/qt4/plugins -sysconfdir /etc \
                                -translationdir /usr/share/qt4/translations -no-rpath -reduce-relocations \
                                -no-separate-debug-info -no-phonon -no-gstreamer -sm -stl -no-webkit \
+                               -no-pch \
                 && gmake install \
                 && cd /root && rm -rf /root/$qtTag /root/$qtPkg \
                 && rm -rf /usr/share/doc/qt4
         ## Alternatively
         # create a package which we can simply download and untar
+        #[ $1 -lt 8 ] && patch -p0 -i /root/patches/qt.patch
         #INSTALL_ROOT=/builds make install
         #tar -C /builds/ -c . | xz -9 -c - > /data/centos${1}_${qtTag}.tar.xz
         ;;
@@ -79,20 +81,22 @@ case "download" in
 esac
 
 pushd /usr/lib64/qt4/bin
-for i in * ; do
-    case "${i}" in
-        assistant|designer|linguist|lrelease|lupdate|moc|qmake|qtconfig|qtdemo|uic)
-        mv $i ../../../bin/${i}-qt4
-        ln -s ../../../bin/${i}-qt4 .
-        ln -s ../../../bin/${i}-qt4 $i
-        ;;
-    *)
-        mv $i ../../../bin/
-        ln -s ../../../bin/$i .
-        ;;
-    esac
-done
-popd
+if [[ "$PWD" == "/usr/lib64/qt4/bin" ]]; then
+    for i in * ; do
+        case "${i}" in
+            assistant|designer|linguist|lrelease|lupdate|moc|qmake|qtconfig|qtdemo|uic)
+            mv $i ../../../bin/${i}-qt4
+            ln -s ../../../bin/${i}-qt4 .
+            ln -s ../../../bin/${i}-qt4 $i
+            ;;
+        *)
+            mv $i ../../../bin/
+            ln -s ../../../bin/$i .
+            ;;
+        esac
+    done
+    popd
+fi
 
 /sbin/ldconfig
 

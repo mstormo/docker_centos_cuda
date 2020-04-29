@@ -1,12 +1,12 @@
 #FROM centos:5
 #FROM centos:6
-#FROM centos:7
-FROM centos:8
+FROM centos:7
+#FROM centos:8
 LABEL Description="CentOS with various CUDA versions for quick build of products based on customer configuration"
 LABEL Maintainer="Marius Storm-Olsen <mstormo@gmail.com>"
 
-ARG os_ver=8
-ARG cuda_ver=10.2
+ARG os_ver=7
+ARG cuda_ver=5.0
 
 # add a few volumes useful for the image
 #     /sources  - persistant storage for application sources (host FS)

@@ -73,7 +73,7 @@ buildAndPush() {
     read -p "[Enter to continue, Ctrl+C to stop]"
 
     branches=()
-    eval "$(git for-each-ref --shell --format='branches+=(%(refname))' refs/heads/)"
+    eval "$(git for-each-ref --shell --format='branches+=(%(refname))' refs/heads/ | sort -nr)"
     echo Will build the following branches ------------ > build.log
     for branch in "${branches[@]}"; do
         local_branch=${branch#refs/heads/}

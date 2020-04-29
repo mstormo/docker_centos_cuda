@@ -51,13 +51,16 @@ createMergeAndUpdateLocalBranches() {
 		sed -i -e "s/\(ARG os_ver\).*/\1=$local_os/m" -e "s/\(ARG cuda_ver\).*/\1=$local_cuda/m" Dockerfile
 		case "$local_os" in
 			5)
-				sed -i -e 's/.*\(FROM centos:5\)/\1/m' -e 's/.*\(FROM centos:[67]\)/#\1/m' Dockerfile
+				sed -i -e 's/.*\(FROM centos:5\)/\1/m' -e 's/.*\(FROM centos:[678]\)/#\1/m' Dockerfile
 				;;
 			6)
-				sed -i -e 's/.*\(FROM centos:6\)/\1/m' -e 's/.*\(FROM centos:[57]\)/#\1/m' Dockerfile
+				sed -i -e 's/.*\(FROM centos:6\)/\1/m' -e 's/.*\(FROM centos:[578]\)/#\1/m' Dockerfile
 				;;
 			7)
-				sed -i -e 's/.*\(FROM centos:7\)/\1/m' -e 's/.*\(FROM centos:[56]\)/#\1/m' Dockerfile
+				sed -i -e 's/.*\(FROM centos:7\)/\1/m' -e 's/.*\(FROM centos:[568]\)/#\1/m' Dockerfile
+				;;
+			8)
+				sed -i -e 's/.*\(FROM centos:8\)/\1/m' -e 's/.*\(FROM centos:[567]\)/#\1/m' Dockerfile
 				;;
 		esac
 		git commit -m "Update Dockerfile for CentOS $local_os, Cuda $local_cuda" Dockerfile

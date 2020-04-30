@@ -36,7 +36,7 @@ case "$1" in
 esac
 
 # make python3 the default python interpreter
-alternatives --set python /usr/bin/python3
+alternatives --set python /usr/local/bin/python3
 
 python3 -m ensurepip
 python3 -m pip install --upgrade pip

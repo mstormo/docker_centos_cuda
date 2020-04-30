@@ -94,18 +94,24 @@ dockerCleanup() {
 
 buildAndPush() {
     remote_repo=$1
+    filter=$2
+
     docker system df
     echo
-    echo Do you want to build and push all local branches to ${remote_repo}:\<branches\>?
-    read -p "[Enter to continue, Ctrl+C to stop]"
 
     branches=()
-    eval "$(git for-each-ref --shell --format='branches+=(%(refname))' refs/heads/ | sort -nr)"
-    echo Will build the following branches ------------ > build.log
+    eval "$(git for-each-ref --shell --format='branches+=(%(refname))' refs/heads/ | sort -nr | grep -e "$filter")"
+    echo Will build the following branches in order ------------ > build.log
+    echo Will build the following branches in order:
     for branch in "${branches[@]}"; do
         local_branch=${branch#refs/heads/}
         echo $local_branch >> build.log
+        echo $local_branch
     done
+    echo
+
+    echo Do you want to build and push all local branches to ${remote_repo}:\<branches\>?
+    read -p "[Enter to continue, Ctrl+C to stop]"
 
     echo >> build.log
     echo Building  ------------------------------------------------------------ >> build.log
